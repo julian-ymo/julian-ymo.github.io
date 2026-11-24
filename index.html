@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Film Desk – film simulations for your photos</title>
+<meta name="description" content="Film Desk is a free photo editor with 20 classic film simulations, a camera-style Q menu, pro tools, recipes and full-quality export. For Android, PC and tablet.">
+<meta property="og:title" content="Film Desk – film simulations for your photos">
+<meta property="og:description" content="Free photo editor with 20 classic film simulations, a Q menu, pro tools and export. Android, PC and tablet.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://julian-ymo.github.io/">
+<meta name="theme-color" content="#121110">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23E8A33D' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 3l3.5 6M21 12h-7M16.5 19.8L13 14M7.5 19.8L11 14M3 12h7M7.5 4.2L11 10'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#121110;--bg2:#1A1816;--card:#1C1A18;--line:#2A2724;--line2:#3A3631;--text:#EDE6DA;--muted:#A8A096;--dim:#8E877D;--accent:#E8A33D;--accent-ink:#121110}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}a:hover{color:#F4C072}
+h1,h2,h3{font-family:"Space Grotesk",sans-serif;margin:0;letter-spacing:-0.02em}
+p{margin:0}
+.wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+.eyebrow{font-family:"JetBrains Mono",monospace;font-size:13px;letter-spacing:.08em;color:var(--accent);text-transform:uppercase}
+.section{padding:96px 0;border-top:1px solid var(--line)}
+.section-head{display:flex;flex-direction:column;gap:12px;max-width:640px;margin-bottom:48px}
+.section-head h2{font-size:44px;line-height:1.1;font-weight:700}
+.muted{color:var(--muted)}
+.btn{display:inline-flex;align-items:center;gap:10px;font-weight:600;text-decoration:none;padding:16px 26px;border-radius:999px;min-height:48px}
+.btn-primary{background:var(--accent);color:var(--accent-ink)}.btn-primary:hover{color:var(--accent-ink);filter:brightness(1.08)}
+.btn-ghost{border:1px solid var(--line2);color:var(--text);font-weight:500}.btn-ghost:hover{color:var(--text);border-color:#5A544C}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+header.top{position:sticky;top:0;z-index:10;background:rgba(18,17,16,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:20px 28px;padding-top:16px;padding-bottom:16px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:22px}
+.logo:hover{color:var(--text)}
+nav.links{display:flex;flex-wrap:wrap;gap:6px 24px;margin-left:auto;font-size:15px}
+nav.links a{color:var(--muted);text-decoration:none}nav.links a:hover{color:var(--text)}
+header.top .btn{padding:10px 18px;min-height:44px;font-size:15px}
+.hero{display:flex;flex-wrap:wrap;align-items:center;gap:64px;padding:72px 0 64px}
+.hero-text{flex:1 1 480px;min-width:0;display:flex;flex-direction:column;gap:28px}
+.hero h1{font-weight:700;font-size:clamp(44px,6vw,80px);line-height:1.02;letter-spacing:-0.03em}
+.hero p.lead{font-size:20px;color:var(--muted);max-width:560px}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:14px}
+.hero .small{font-size:14px;color:var(--dim)}
+.hero-phone{flex:0 1 320px;display:flex;justify-content:center;margin:0 auto}
+.phone{width:280px;height:580px;border-radius:40px;border:10px solid var(--line);background:var(--card);padding:18px 14px;display:flex;flex-direction:column;gap:12px;flex-shrink:0}
+.phone.big{width:300px;height:620px;border-radius:44px}
+.phone .screen{flex:1;border-radius:18px;overflow:hidden;display:flex}
+.phone .screen svg{width:100%;height:100%;display:block}
+.phone-bar{display:flex;justify-content:space-between;align-items:center;font-size:13px}.phone-bar span:first-child{font-weight:600}.phone-bar span:last-child{color:var(--dim)}
+.chips{display:flex;gap:6px}
+.chip{flex:1;min-width:0;height:44px;border:none;border-radius:10px;background:var(--line);color:var(--muted);font:inherit;font-size:12px;font-weight:600;cursor:pointer;padding:0 4px}
+.chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.film-svg{transition:filter .35s ease}
+.try{padding:0 0 96px}
+.try-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:28px}
+.try-head h2{font-size:32px;font-weight:700}
+.try-body{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start}
+.try figure{margin:0;flex:1 1 560px;min-width:0;display:flex;flex-direction:column;gap:12px}
+.try .photo{border-radius:20px;overflow:hidden;aspect-ratio:3/2;background:var(--card)}
+.try .photo svg{width:100%;height:100%;display:block}
+.try figcaption{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;font-size:15px}
+.try figcaption strong{font-family:"Space Grotesk",sans-serif;font-weight:500;font-size:20px}
+.film-list{flex:1 1 300px;display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.film-btn{text-align:left;min-height:56px;padding:10px 14px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--text);font:inherit;cursor:pointer;display:flex;flex-direction:column;gap:2px}
+.film-btn:hover{border-color:#4A453F}
+.film-btn b{font-size:15px;font-weight:600}.film-btn small{font-size:12px;color:var(--muted)}
+.film-btn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.film-btn[aria-pressed="true"] small{color:#3A2A10}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:10px}
+.card h3{font-size:22px}
+.card p{color:var(--muted)}
+.inside{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px}
+.inside > div{display:flex;flex-direction:column;align-items:center;gap:20px}
+.inside .cap{text-align:center;display:flex;flex-direction:column;gap:6px;max-width:320px}
+.inside .cap h3{font-size:24px}
+.qgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.q{background:var(--line);border-radius:8px;padding:8px 6px;display:flex;flex-direction:column;gap:2px}
+.q span{font-size:11px;color:var(--muted)}.q b{font-size:12px;font-weight:600}
+.q.on{background:var(--accent);color:var(--accent-ink)}.q.on span{color:var(--accent-ink)}
+.strip{height:150px;border-radius:12px;display:flex;overflow:hidden;flex-shrink:0}.strip i{flex:1}
+.slider{display:flex;flex-direction:column;gap:6px}
+.slider .row{display:flex;justify-content:space-between;font-size:12px}.slider .row span:first-child{color:var(--muted)}
+.track{height:4px;border-radius:2px;background:var(--line);position:relative}.track i{position:absolute;left:0;top:0;bottom:0;background:var(--accent);border-radius:2px}
+.seg{display:flex;gap:6px}.seg span{flex:1;text-align:center;font-size:13px;padding:9px 0;border-radius:8px;background:var(--line);color:var(--muted)}.seg span.on{background:var(--accent);color:var(--accent-ink);font-weight:600}
+.films-bg{background:var(--bg2);border-bottom:1px solid var(--line)}
+.swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.swatch{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--bg)}
+.swatch .bars{display:flex;height:96px}.swatch .bars i{flex:1}
+.swatch div.t{padding:16px 18px}.swatch div.t b{display:block;font-family:"Space Grotesk",sans-serif;font-weight:500;font-size:18px}.swatch div.t span{font-size:14px;color:var(--muted)}
+.more{margin-top:24px;color:var(--muted);font-size:15px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:32px}
+.step{border-top:2px solid var(--accent);padding-top:20px;display:flex;flex-direction:column;gap:10px}
+.step .n{font-family:"JetBrains Mono",monospace;font-size:14px;color:var(--accent)}
+.step h3{font-size:24px}.step p{color:var(--muted)}
+.download{padding:0 0 0}
+.dl-box{background:var(--accent);color:var(--accent-ink);border-radius:32px;padding:64px 48px;display:flex;flex-wrap:wrap;align-items:center;gap:40px}
+.dl-box h2{font-size:48px;line-height:1.05;font-weight:700}
+.dl-box p{font-size:18px;color:#3A2A10}
+.dl-text{flex:1 1 420px;display:flex;flex-direction:column;gap:12px}
+.dl-btns{display:flex;flex-direction:column;gap:12px;flex:0 1 320px}
+.dl-btns a{text-decoration:none;font-weight:600;padding:18px 24px;border-radius:16px;display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:56px}
+.dl-btns a.dark{background:var(--bg);color:var(--text)}.dl-btns a.dark:hover{color:var(--text)}
+.dl-btns a.line{border:2px solid var(--bg);color:var(--bg)}.dl-btns a.line:hover{color:var(--bg)}
+.dl-btns a small{font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:500;opacity:.75}
+.dl-note{font-size:14px;color:#3A2A10}
+.faq{max-width:820px;margin:0 auto;padding:96px 32px;display:flex;flex-direction:column;gap:32px}
+.faq h2{font-size:44px;font-weight:700}
+.faq details{border-top:1px solid var(--line);padding-top:20px}
+.faq summary{cursor:pointer;font-size:19px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--accent);font-family:"JetBrains Mono",monospace}
+.faq details[open] summary::after{content:"–"}
+.faq details p{color:var(--muted);margin-top:10px}
+footer{border-top:1px solid var(--line)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center;padding-top:32px;padding-bottom:32px;font-size:14px;color:var(--dim)}
+footer b{font-family:"Space Grotesk",sans-serif;color:var(--text)}
+footer nav{margin-left:auto;display:flex;gap:20px}footer nav a{color:var(--muted)}
+@media (max-width:640px){
+.wrap{padding:0 20px}
+.section{padding:72px 0}
+.section-head h2,.faq h2{font-size:34px}
+.dl-box{padding:40px 24px;border-radius:24px}.dl-box h2{font-size:36px}
+.faq{padding:72px 20px}
+nav.links{margin-left:0;order:3;width:100%}
+header.top .btn{margin-left:auto}
+.hero{padding-top:48px;gap:48px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.film-svg{transition:none}}
+</style>
+</head>
+<body>
+
+<header class="top">
+<div class="wrap">
+<a class="logo" href="#top" aria-label="Film Desk home">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E8A33D" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3l3.5 6M21 12h-7M16.5 19.8L13 14M7.5 19.8L11 14M3 12h7M7.5 4.2L11 10"/></svg>
+Film Desk</a>
+<nav class="links" aria-label="Sections">
+<a href="#features">Features</a>
+<a href="#inside">Inside the app</a>
+<a href="#films">Film simulations</a>
+<a href="#how">How it works</a>
+<a href="#faq">FAQ</a>
+</nav>
+<a class="btn btn-primary" href="#download">Get the app</a>
+</div>
+</header>
+
+<main id="top">
+
+<section class="wrap hero">
+<div class="hero-text">
+<div class="eyebrow">Free photo editor · Android · Web</div>
+<h1>Film looks for every photo you take.</h1>
+<p class="lead">Film Desk brings 20 classic film simulations and in-camera settings to your phone, with pro editing tools when you want more control.</p>
+<div class="ctas">
+<a class="btn btn-primary apk-link" href="download/FilmDesk.apk" download>
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>
+Download for Android</a>
+<a class="btn btn-ghost" href="https://julian-ymo.github.io/Film-Desk/">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>
+Use it on PC or other devices</a>
+</div>
+<p class="small">Works on Android phones · No account needed · Updates install over the old version</p>
+</div>
+<div class="hero-phone">
+<div class="phone big">
+<div class="screen">
+<svg id="hero-svg" class="film-svg" viewBox="0 0 240 420" preserveAspectRatio="xMidYMid slice" role="img" aria-label="City street at dusk with the selected film"><rect width="240" height="420" fill="#E9A980"/><circle cx="170" cy="120" r="30" fill="#F6D08A"/><rect x="0" y="150" width="70" height="270" fill="#3E4A5C"/><rect x="70" y="200" width="60" height="220" fill="#7A4B3F"/><rect x="130" y="170" width="50" height="250" fill="#4F6A6B"/><rect x="180" y="230" width="60" height="190" fill="#8C6A4E"/><rect x="14" y="180" width="12" height="16" fill="#F2C766"/><rect x="40" y="210" width="12" height="16" fill="#F2C766"/><rect x="14" y="250" width="12" height="16" fill="#F2C766"/><rect x="86" y="230" width="10" height="14" fill="#F2C766"/><rect x="108" y="270" width="10" height="14" fill="#F2C766"/><rect x="144" y="200" width="10" height="14" fill="#F2C766"/><rect x="196" y="260" width="12" height="14" fill="#F2C766"/><rect x="0" y="360" width="240" height="60" fill="#2B2A2E"/><rect x="20" y="386" width="30" height="4" fill="#D9D2C5"/><rect x="105" y="386" width="30" height="4" fill="#D9D2C5"/><rect x="190" y="386" width="30" height="4" fill="#D9D2C5"/><rect x="150" y="330" width="44" height="28" rx="6" fill="#C2473A"/><circle cx="160" cy="360" r="6" fill="#121110"/><circle cx="184" cy="360" r="6" fill="#121110"/></svg>
+</div>
+<div class="chips" role="group" aria-label="Film for the phone preview">
+<button type="button" class="chip" data-hero="provia" aria-pressed="false">Provia</button>
+<button type="button" class="chip" data-hero="cchrome" aria-pressed="true">Classic Chrome</button>
+<button type="button" class="chip" data-hero="acros" aria-pressed="false">Acros</button>
+</div>
+</div>
+</div>
+</section>
+
+<section class="wrap try" id="try">
+<div class="try-head">
+<h2>Try a film simulation.</h2>
+<span class="muted">Tap a film to see it on the photo</span>
+</div>
+<div class="try-body">
+<figure>
+<div class="photo">
+<svg id="try-svg" class="film-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Mt Fuji at sunset over a lake, with a red pagoda and cherry blossoms, shown with the selected film simulation"><defs><linearGradient id="jp-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3B4F7A"/><stop offset="0.55" stop-color="#E58A5C"/><stop offset="1" stop-color="#F6C27A"/></linearGradient><linearGradient id="jp-lake" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E0956A"/><stop offset="1" stop-color="#2E3A5C"/></linearGradient></defs><rect width="600" height="260" fill="url(#jp-sky)"/><circle cx="420" cy="215" r="52" fill="#FBE3A0" opacity="0.25"/><circle cx="420" cy="215" r="26" fill="#FBE3A0"/><path d="M0 250 L60 215 L120 232 L190 205 L250 250Z M380 250 L450 222 L520 236 L600 210 L600 250Z" fill="#7A6182" opacity="0.7"/><path d="M150 250 L270 120 Q300 105 330 120 L470 250Z" fill="#5A5677"/><path d="M248 145 L270 120 Q300 105 330 120 L352 145 L335 140 L322 152 L305 138 L290 152 L276 140 L262 150Z" fill="#F3EEF2"/><rect y="250" width="600" height="150" fill="url(#jp-lake)"/><path d="M150 250 L270 380 Q300 395 330 380 L470 250Z" fill="#5A5677" opacity="0.35"/><rect x="398" y="262" width="44" height="3" rx="1.5" fill="#FBE3A0" opacity="0.8"/><rect x="405" y="276" width="30" height="3" rx="1.5" fill="#FBE3A0" opacity="0.6"/><rect x="410" y="290" width="20" height="3" rx="1.5" fill="#FBE3A0" opacity="0.4"/><path d="M285 318 L325 318 L318 326 L292 326Z" fill="#1F2433"/><rect x="303" y="300" width="2" height="18" fill="#1F2433"/><path d="M200 90 q6 -6 12 0 q6 -6 12 0 M240 70 q5 -5 10 0 q5 -5 10 0 M180 110 q4 -4 8 0 q4 -4 8 0" stroke="#3B2F45" stroke-width="2" fill="none"/><path d="M0 292 Q120 272 220 302 L220 400 L0 400Z" fill="#2F3B2E"/><rect x="68" y="298" width="64" height="6" fill="#6B5A4E"/><rect x="75" y="280" width="50" height="18" fill="#B8342A"/><rect x="79" y="256" width="42" height="16" fill="#B8342A"/><rect x="83" y="234" width="34" height="14" fill="#B8342A"/><rect x="86" y="214" width="28" height="12" fill="#B8342A"/><rect x="89" y="196" width="22" height="10" fill="#B8342A"/><path d="M54 280 L146 280 L127.6 272 L72.4 272Z M60 256 L140 256 L124 248 L76 248Z M66 234 L134 234 L120.4 226 L79.6 226Z M72 214 L128 214 L116.8 206 L83.2 206Z M78 196 L122 196 L113.2 188 L86.8 188Z" fill="#3A2A2A"/><rect x="98.5" y="168" width="3" height="20" fill="#3A2A2A"/><path d="M380 400 Q470 330 600 318 L600 400Z" fill="#2F3B2E"/><path d="M520 400 Q514 330 540 290 M540 290 Q560 270 590 262 M540 290 Q520 268 500 262" stroke="#3B2A26" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="500" cy="258" r="26" fill="#E89AB4"/><circle cx="540" cy="250" r="30" fill="#F2B5C8"/><circle cx="585" cy="252" r="28" fill="#E89AB4"/><circle cx="560" cy="225" r="26" fill="#F7CFDC"/><circle cx="520" cy="228" r="22" fill="#F7CFDC"/><circle cx="598" cy="226" r="22" fill="#F2B5C8"/><circle cx="478" cy="280" r="16" fill="#F2B5C8"/><circle cx="470" cy="330" r="3" fill="#F7CFDC"/><circle cx="455" cy="350" r="2.5" fill="#F2B5C8"/><circle cx="490" cy="365" r="3" fill="#F7CFDC"/></svg>
+</div>
+<figcaption aria-live="polite"><strong id="try-name">Classic Neg</strong><span class="muted" id="try-note">Hard contrast, nostalgic</span></figcaption>
+</figure>
+<div class="film-list" id="film-list" role="group" aria-label="Film simulations"></div>
+</div>
+</section>
+
+<section class="section" id="features">
+<div class="wrap">
+<div class="section-head">
+<div class="eyebrow">Features</div>
+<h2>Edit the way you shoot.</h2>
+</div>
+<div class="grid">
+<div class="card">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E8A33D" stroke-width="1.8" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 6v12M17 6v12"/></svg>
+<h3>20 film simulations</h3>
+<p>Classic Neg, Classic Chrome, Velvia, Acros and more, tuned against a real camera.</p>
+</div>
+<div class="card">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E8A33D" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+<h3>Q menu</h3>
+<p>Grain, color chrome, white balance shift, highlight and shadow tone, all on one screen like a camera.</p>
+</div>
+<div class="card">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E8A33D" stroke-width="1.8" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>
+<h3>Pro tools</h3>
+<p>Curves, exposure, color and detail controls for when a film look is only the starting point.</p>
+</div>
+<div class="card">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E8A33D" stroke-width="1.8" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M9 12h7M9 16h7M9 8h3"/></svg>
+<h3>Recipes</h3>
+<p>Save the settings you love as a recipe and apply them to any photo in one tap.</p>
+</div>
+<div class="card">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E8A33D" stroke-width="1.8" aria-hidden="true"><path d="M6 2v16h16M2 6h16v16"/></svg>
+<h3>Crop</h3>
+<p>Frame your shot with crop and straighten tools before you export.</p>
+</div>
+<div class="card">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E8A33D" stroke-width="1.8" aria-hidden="true"><rect x="2" y="4" width="14" height="10" rx="1.5"/><rect x="17" y="8" width="5" height="12" rx="1.5"/><path d="M6 18h7"/></svg>
+<h3>Phone, PC and tablet</h3>
+<p>Use the Android app, or open the web version in a browser on a bigger screen.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section" id="inside">
+<div class="wrap">
+<div class="section-head">
+<div class="eyebrow">Inside the app</div>
+<h2>From film look to finished photo.</h2>
+</div>
+<div class="inside">
+
+<div>
+<div class="phone">
+<div class="phone-bar"><span>Q menu</span><span>Done</span></div>
+<div class="strip" aria-hidden="true"><i style="background:#3F6E72"></i><i style="background:#8A9A5C"></i><i style="background:#E0B98A"></i><i style="background:#B4473B"></i></div>
+<div class="qgrid">
+<div class="q on"><span>Film</span><b>Classic Neg</b></div>
+<div class="q"><span>Grain</span><b>Weak</b></div>
+<div class="q"><span>Color chrome</span><b>Strong</b></div>
+<div class="q"><span>CC FX blue</span><b>Weak</b></div>
+<div class="q"><span>WB shift</span><b>R+2 B-1</b></div>
+<div class="q"><span>Dynamic range</span><b>DR400</b></div>
+<div class="q"><span>Highlight</span><b>+1</b></div>
+<div class="q"><span>Shadow</span><b>+2</b></div>
+<div class="q"><span>Color</span><b>-1</b></div>
+<div class="q"><span>Sharpness</span><b>0</b></div>
+<div class="q"><span>Clarity</span><b>+2</b></div>
+<div class="q"><span>Noise red.</span><b>-2</b></div>
+</div>
+</div>
+<div class="cap"><h3>Q menu</h3><p class="muted">Every camera setting on one screen, just like the quick menu on a real camera.</p></div>
+</div>
+
+<div>
+<div class="phone">
+<div class="phone-bar"><span>Pro tools</span><span>Reset</span></div>
+<div class="strip" style="background:var(--bg);border:1px solid var(--line);position:relative" aria-hidden="true">
+<svg width="100%" height="100%" viewBox="0 0 240 150" preserveAspectRatio="none"><path d="M80 0V150M160 0V150M0 50H240M0 100H240" stroke="#2A2724" stroke-width="1" fill="none"/><path d="M0 150 C60 140 90 95 120 75 S190 15 240 0" stroke="#E8A33D" stroke-width="2.5" fill="none"/><circle cx="120" cy="75" r="5" fill="#E8A33D"/></svg>
+<span style="position:absolute;left:10px;top:8px;font-size:11px;color:var(--muted)">Curves</span>
+</div>
+<div class="slider"><div class="row"><span>Exposure</span><span>+0.3</span></div><div class="track"><i style="width:56%"></i></div></div>
+<div class="slider"><div class="row"><span>Contrast</span><span>+12</span></div><div class="track"><i style="width:62%"></i></div></div>
+<div class="slider"><div class="row"><span>Temperature</span><span>5600K</span></div><div class="track"><i style="width:48%"></i></div></div>
+<div class="slider"><div class="row"><span>Vignette</span><span>-18</span></div><div class="track"><i style="width:34%"></i></div></div>
+<div class="seg" style="margin-top:auto"><span class="on">Light</span><span>Color</span><span>Detail</span></div>
+</div>
+<div class="cap"><h3>Pro tools</h3><p class="muted">Curves, exposure, color and detail controls when you want to go further than a film look.</p></div>
+</div>
+
+<div>
+<div class="phone">
+<div class="phone-bar"><span>Export</span><span>Cancel</span></div>
+<div class="strip" aria-hidden="true"><i style="background:#3F6E72"></i><i style="background:#8A9A5C"></i><i style="background:#E0B98A"></i><i style="background:#B4473B"></i></div>
+<div class="slider"><span style="font-size:12px;color:var(--muted)">Format</span><div class="seg"><span class="on">JPEG</span><span>PNG</span></div></div>
+<div class="slider"><span style="font-size:12px;color:var(--muted)">Size</span><div class="seg"><span class="on">Full</span><span>4K</span><span>2K</span></div></div>
+<div class="slider"><div class="row"><span>Quality</span><span>95%</span></div><div class="track"><i style="width:95%"></i></div></div>
+<div style="display:flex;flex-direction:column;gap:8px;margin-top:auto">
+<span style="text-align:center;font-size:14px;padding:12px 0;border-radius:12px;background:var(--accent);color:var(--accent-ink);font-weight:600">Save to gallery</span>
+<span style="text-align:center;font-size:14px;padding:12px 0;border-radius:12px;border:1px solid var(--line2)">Share</span>
+</div>
+</div>
+<div class="cap"><h3>Export</h3><p class="muted">Save at full quality or share straight to Instagram, WhatsApp and more.</p></div>
+</div>
+
+</div>
+</div>
+</section>
+
+<section class="section films-bg" id="films">
+<div class="wrap">
+<div class="section-head">
+<div class="eyebrow">Film simulations</div>
+<h2>Pick a film. Watch the photo change.</h2>
+</div>
+<div class="swatches">
+<div class="swatch"><div class="bars" aria-hidden="true"><i style="background:#3E6B8C"></i><i style="background:#6E9A4E"></i><i style="background:#D8B36A"></i><i style="background:#C25A43"></i></div><div class="t"><b>Provia</b><span>Standard, true to life</span></div></div>
+<div class="swatch"><div class="bars" aria-hidden="true"><i style="background:#1F5FA8"></i><i style="background:#3E9A2F"></i><i style="background:#F0B530"></i><i style="background:#D63A2A"></i></div><div class="t"><b>Velvia</b><span>Vivid, punchy landscapes</span></div></div>
+<div class="swatch"><div class="bars" aria-hidden="true"><i style="background:#5B7A8E"></i><i style="background:#7E9467"></i><i style="background:#C9A877"></i><i style="background:#9C5546"></i></div><div class="t"><b>Classic Chrome</b><span>Muted, documentary tones</span></div></div>
+<div class="swatch"><div class="bars" aria-hidden="true"><i style="background:#3F6E72"></i><i style="background:#8A9A5C"></i><i style="background:#E0B98A"></i><i style="background:#B4473B"></i></div><div class="t"><b>Classic Neg</b><span>Hard contrast, nostalgic color</span></div></div>
+<div class="swatch"><div class="bars" aria-hidden="true"><i style="background:#50727A"></i><i style="background:#7C8C6E"></i><i style="background:#BFAE90"></i><i style="background:#8E6255"></i></div><div class="t"><b>Eterna</b><span>Soft, cinematic</span></div></div>
+<div class="swatch"><div class="bars" aria-hidden="true"><i style="background:#5E7B86"></i><i style="background:#93955F"></i><i style="background:#E3B97A"></i><i style="background:#BF6A45"></i></div><div class="t"><b>Nostalgic Neg</b><span>Warm, amber highlights</span></div></div>
+<div class="swatch"><div class="bars" aria-hidden="true"><i style="background:#2B2B2B"></i><i style="background:#5C5C5C"></i><i style="background:#9A9A9A"></i><i style="background:#D9D9D9"></i></div><div class="t"><b>Acros</b><span>Fine-grain black and white</span></div></div>
+<div class="swatch"><div class="bars" aria-hidden="true"><i style="background:#6D86A0"></i><i style="background:#86A87A"></i><i style="background:#E6C59A"></i><i style="background:#D08070"></i></div><div class="t"><b>Astia</b><span>Soft skin tones, portraits</span></div></div>
+</div>
+<p class="more">…and more, 20 film simulations in total.</p>
+</div>
+</section>
+
+<section class="section" id="how" style="border-top:none">
+<div class="wrap">
+<div class="section-head">
+<div class="eyebrow">How it works</div>
+<h2>Three steps, no learning curve.</h2>
+</div>
+<div class="steps">
+<div class="step"><div class="n">01</div><h3>Open a photo</h3><p>Pick any picture from your gallery or files.</p></div>
+<div class="step"><div class="n">02</div><h3>Choose a film</h3><p>Tap a simulation, then fine-tune it in the Q menu.</p></div>
+<div class="step"><div class="n">03</div><h3>Save and share</h3><p>Export at full quality, ready for Instagram or print.</p></div>
+</div>
+</div>
+</section>
+
+<section class="wrap download" id="download">
+<div class="dl-box">
+<div class="dl-text">
+<h2>Get Film Desk free.</h2>
+<p>Download the Android app, or open the web version in any browser on your PC, tablet or other devices.</p>
+</div>
+<div class="dl-btns">
+<a class="dark apk-link" href="download/FilmDesk.apk" download>Android APK <small id="apk-label">Latest version</small></a>
+<a class="line" href="https://julian-ymo.github.io/Film-Desk/">Open web version <small>PC · tablet</small></a>
+<p class="dl-note" id="apk-note" hidden>The Android download is coming soon. Use the web version for now.</p>
+</div>
+</div>
+</section>
+
+<section class="faq" id="faq">
+<h2>Questions</h2>
+<details>
+<summary>Is Film Desk free?</summary>
+<p>Yes. Film Desk is free to download and use.</p>
+</details>
+<details>
+<summary>How do I install the APK?</summary>
+<p>Tap "Download for Android" on your phone, open the downloaded file, and allow installs from your browser when Android asks. New versions install over the old one, so your app stays in place.</p>
+</details>
+<details>
+<summary>Are my photos uploaded anywhere?</summary>
+<p>No. Your photos are edited on your own device and never leave it.</p>
+</details>
+<details>
+<summary>Can I use it on a computer?</summary>
+<p>Yes. Open the web version in any modern browser on a PC, Mac or tablet. Nothing to install.</p>
+</details>
+<details>
+<summary>Is Film Desk made by a camera company?</summary>
+<p>No. Film Desk is an independent app and isn't affiliated with or endorsed by any camera maker.</p>
+</details>
+</section>
+
+</main>
+
+<footer>
+<div class="wrap">
+<b>Film Desk</b>
+<span>© 2026 Film Desk</span>
+<nav aria-label="Footer"><a href="#download">Download</a><a href="#faq">FAQ</a></nav>
+</div>
+</footer>
+
+<script>
+(function () {
+  var films = [
+    { id: 'orig', name: 'Original', note: 'No film applied', f: 'none' },
+    { id: 'provia', name: 'Provia', note: 'Standard, true to life', f: 'saturate(1.05)' },
+    { id: 'velvia', name: 'Velvia', note: 'Vivid, punchy color', f: 'saturate(1.6) contrast(1.15)' },
+    { id: 'astia', name: 'Astia', note: 'Soft, gentle tones', f: 'saturate(1.1) brightness(1.05) contrast(0.95)' },
+    { id: 'cchrome', name: 'Classic Chrome', note: 'Muted, documentary', f: 'saturate(0.7) contrast(1.1) sepia(0.12)' },
+    { id: 'cneg', name: 'Classic Neg', note: 'Hard contrast, nostalgic', f: 'saturate(0.85) contrast(1.2) hue-rotate(-8deg) sepia(0.15)' },
+    { id: 'eterna', name: 'Eterna', note: 'Soft, cinematic', f: 'saturate(0.6) contrast(0.9) brightness(1.05)' },
+    { id: 'nneg', name: 'Nostalgic Neg', note: 'Warm amber highlights', f: 'sepia(0.3) saturate(1.1) brightness(1.05)' },
+    { id: 'acros', name: 'Acros', note: 'Fine-grain black and white', f: 'grayscale(1) contrast(1.2)' }
+  ];
+  function byId(id) { for (var i = 0; i < films.length; i++) if (films[i].id === id) return films[i]; }
+
+  var list = document.getElementById('film-list');
+  var trySvg = document.getElementById('try-svg');
+  var tryName = document.getElementById('try-name');
+  var tryNote = document.getElementById('try-note');
+  function pick(id) {
+    var f = byId(id);
+    trySvg.style.filter = f.f;
+    tryName.textContent = f.name;
+    tryNote.textContent = f.note;
+    var btns = list.querySelectorAll('button');
+    for (var i = 0; i < btns.length; i++) btns[i].setAttribute('aria-pressed', btns[i].dataset.film === id ? 'true' : 'false');
+  }
+  films.forEach(function (f) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'film-btn';
+    b.dataset.film = f.id;
+    var n = document.createElement('b'); n.textContent = f.name;
+    var s = document.createElement('small'); s.textContent = f.note;
+    b.appendChild(n); b.appendChild(s);
+    b.addEventListener('click', function () { pick(f.id); });
+    list.appendChild(b);
+  });
+  pick('cneg');
+
+  var heroSvg = document.getElementById('hero-svg');
+  var chips = document.querySelectorAll('[data-hero]');
+  function pickHero(id) {
+    heroSvg.style.filter = byId(id).f;
+    for (var i = 0; i < chips.length; i++) chips[i].setAttribute('aria-pressed', chips[i].dataset.hero === id ? 'true' : 'false');
+  }
+  for (var i = 0; i < chips.length; i++) chips[i].addEventListener('click', function () { pickHero(this.dataset.hero); });
+  pickHero('cchrome');
+
+  // If the APK hasn't been uploaded yet, send people to the web version instead of a broken link.
+  fetch('download/FilmDesk.apk', { method: 'HEAD' }).then(function (r) {
+    if (r.ok) return;
+    var links = document.querySelectorAll('.apk-link');
+    for (var i = 0; i < links.length; i++) {
+      links[i].removeAttribute('download');
+      links[i].setAttribute('href', '#download');
+    }
+    document.getElementById('apk-label').textContent = 'Coming soon';
+    document.getElementById('apk-note').hidden = false;
+  }).catch(function () {});
+})();
+</script>
+</body>
+</html>
