@@ -159,7 +159,7 @@ Film Desk</a>
 <h1>Film looks for every photo you take.</h1>
 <p class="lead">Film Desk brings 20 classic film simulations and in-camera settings to your phone, with pro editing tools when you want more control.</p>
 <div class="ctas">
-<a class="btn btn-primary apk-link" href="download/FilmDesk.apk" download>
+<a class="btn btn-primary apk-link" href="https://1024terabox.com/s/1fkzOua6z9DbhQLsVDAySCw" target="_blank" rel="noopener">
 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>
 Download for Android</a>
 <a class="btn btn-ghost" href="https://julian-ymo.github.io/Film-Desk/">
@@ -345,9 +345,9 @@ Use it on PC or other devices</a>
 <p>Download the Android app, or open the web version in any browser on your PC, tablet or other devices.</p>
 </div>
 <div class="dl-btns">
-<a class="dark apk-link" href="download/FilmDesk.apk" download>Android APK <small id="apk-label">Latest version</small></a>
+<a class="dark apk-link" href="https://1024terabox.com/s/1fkzOua6z9DbhQLsVDAySCw" target="_blank" rel="noopener">Android APK <small id="apk-label">Latest version</small></a>
 <a class="line" href="https://julian-ymo.github.io/Film-Desk/">Open web version <small>PC · tablet</small></a>
-<p class="dl-note" id="apk-note" hidden>The Android download is coming soon. Use the web version for now.</p>
+<p class="dl-note">The Android download opens on TeraBox.</p>
 </div>
 </div>
 </section>
@@ -360,7 +360,7 @@ Use it on PC or other devices</a>
 </details>
 <details>
 <summary>How do I install the APK?</summary>
-<p>Tap "Download for Android" on your phone, open the downloaded file, and allow installs from your browser when Android asks. New versions install over the old one, so your app stays in place.</p>
+<p>Tap "Download for Android" on your phone. It opens the file on TeraBox: download FilmDesk.apk from there, open it, and allow installs when Android asks. New versions install over the old one, so your app stays in place.</p>
 </details>
 <details>
 <summary>Are my photos uploaded anywhere?</summary>
@@ -435,17 +435,6 @@ Use it on PC or other devices</a>
   for (var i = 0; i < chips.length; i++) chips[i].addEventListener('click', function () { pickHero(this.dataset.hero); });
   pickHero('cchrome');
 
-  // If the APK hasn't been uploaded yet, send people to the web version instead of a broken link.
-  fetch('download/FilmDesk.apk', { method: 'HEAD' }).then(function (r) {
-    if (r.ok) return;
-    var links = document.querySelectorAll('.apk-link');
-    for (var i = 0; i < links.length; i++) {
-      links[i].removeAttribute('download');
-      links[i].setAttribute('href', '#download');
-    }
-    document.getElementById('apk-label').textContent = 'Coming soon';
-    document.getElementById('apk-note').hidden = false;
-  }).catch(function () {});
 })();
 </script>
 </body>
