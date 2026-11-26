@@ -1,6 +1,6 @@
 /* Film Desk web — render worker. Keeps the edited photo here so the page never freezes while rendering. */
 'use strict';
-importScripts('model.js?v=4', 'engine.js?v=4');
+importScripts('model.js?v=5', 'engine.js?v=5', 'raw.js?v=5');
 const M = self.FDM, E = self.FDE;
 
 let src = null, half = null, stats = null, geoKey = null, geoImg = null;
@@ -100,6 +100,18 @@ self.onmessage = (e) => {
         if (out.w !== m.tw || out.h !== m.th) out = resize(out, m.tw, m.th);
         if (m.sharpen && m.sharpen !== 'Off') E.outputSharpen(out, m.sharpen, m.sharpenLevel);
         self.postMessage({ type: 'exported', job: m.job, img: pack(out) }, [out.data.buffer]);
+        break;
+      }
+      case 'raw': {
+        // Develops a camera RAW (LibRaw → WebAssembly), then fits it into maxEdge if asked.
+        FDR.develop(new Uint8Array(m.buf), m.maxEdge || 0).then(img => {
+          let out = img;
+          if (m.fit && Math.max(img.w, img.h) > m.fit) {
+            const k = m.fit / Math.max(img.w, img.h);
+            out = resize(img, Math.max(1, Math.round(img.w * k)), Math.max(1, Math.round(img.h * k)));
+          }
+          self.postMessage({ type: 'rawDone', job: m.job, img: pack(out), fullW: img.fullW, fullH: img.fullH }, [out.data.buffer]);
+        }).catch(err => self.postMessage({ type: 'error', job: m.job, message: String(err && err.message || err) }));
         break;
       }
       case 'resize': {

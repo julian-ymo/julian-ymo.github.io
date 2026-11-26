@@ -41,22 +41,28 @@ async function loadStudio() {
   try { await DB.open(); } catch (e) { toast('Storage is blocked in this browser, so photos are kept only until you close the tab.'); }
   const all = (await DB.all().catch(() => null)) || [];
   all.sort((a, b) => b.added - a.added);
-  S.studio = all.map(it => ({ id: it.id, name: it.name, added: it.added, params: it.params ? M.fromJson(it.params) : null, blob: it.blob, thumb: it.thumb || null }));
+  S.studio = all.map(it => ({ id: it.id, name: it.name, added: it.added, params: it.params ? M.fromJson(it.params) : null, blob: it.blob, thumb: it.thumb || null, raw: !!it.raw }));
 }
 function storeItem(it) {
-  return DB.put({ id: it.id, name: it.name, added: it.added, params: it.params ? M.toJson(it.params) : null, blob: it.blob, thumb: it.thumb || null })
+  return DB.put({ id: it.id, name: it.name, added: it.added, params: it.params ? M.toJson(it.params) : null, blob: it.blob, thumb: it.thumb || null, raw: !!it.raw })
     .catch(() => toast('Could not save to this browser’s storage — it may be full'));
 }
 const itemById = id => S.studio.find(it => it.id === id);
 
 async function importFiles(files) {
-  const list = Array.from(files || []).filter(f => /^image\//.test(f.type) || /\.(jpe?g|png|webp|heic|heif|avif|gif|bmp)$/i.test(f.name));
-  if (!list.length) { toast('No photos found'); return []; }
+  const all = Array.from(files || []);
+  // Keep photos and camera RAW only (the file picker can also offer documents, videos…).
+  const list = [];
+  for (const f of all) if (/^image\//.test(f.type) || /\.(jpe?g|png|webp|heic|heif|avif|gif|bmp)$/i.test(f.name) || await isRawBlob(f)) list.push(f);
+  const skipped = all.length - list.length;
+  const skippedText = skipped === 1 ? 'skipped 1 file that isn’t a photo' : 'skipped ' + skipped + ' files that aren’t photos';
+  if (!list.length) { toast(skipped ? skippedText.replace(/^s/, 'S') : 'No photos found'); return []; }
   const now = Date.now();
-  const items = list.map((f, i) => ({ id: now + i, name: f.name || 'Photo', added: now + list.length - i, params: null, blob: f, thumb: null }));
+  const items = [];
+  for (let i = 0; i < list.length; i++) items.push({ id: now + i, name: list[i].name || 'Photo', added: now + list.length - i, params: null, blob: list[i], thumb: null, raw: await isRawBlob(list[i]) });
   S.studio = items.concat(S.studio);
   for (const it of items) await storeItem(it);
-  toast(items.length === 1 ? 'Imported 1 photo' : 'Imported ' + items.length + ' photos');
+  toast((items.length === 1 ? 'Imported 1 photo' : 'Imported ' + items.length + ' photos') + (skipped ? ', ' + skippedText : ''));
   render();
   return items;
 }
@@ -173,9 +179,11 @@ async function openItem(id) {
   S.committed = S.params;
   S.undo = []; S.redo = [];
   S.tab = 'Film'; S.sheet = null; S.sheetBefore = null; S.curveMode = false; S.picker = false; S.sample = null; S.samplePos = null;
-  S.loading = true; S.source = null; S.previewFor = null; S.simThumbs = []; S.stats = null; S.histogram = null; S.origImg = null; S.origKey = null;
+  S.loading = true; S.source = null; S.currentIsRaw = false; S.previewFor = null; S.simThumbs = []; S.stats = null; S.histogram = null; S.origImg = null; S.origKey = null;
   go('editor');
   try {
+    S.currentIsRaw = await isRawBlob(it.blob);
+    if (S.currentIsRaw) render(); // shows "RAW" while it develops
     const { img, fullW, fullH } = await decodeBlob(it.blob, PREVIEW_EDGE);
     if (S.currentId !== id) return;
     S.fullW = fullW; S.fullH = fullH;
@@ -188,7 +196,7 @@ async function openItem(id) {
   } catch (e) {
     S.loading = false;
     S.missing.add(id);
-    toast('This photo can’t be opened in this browser');
+    toast(S.currentIsRaw ? (e.message || 'This RAW file could not be read') : 'This photo can’t be opened in this browser');
     back();
   }
 }
@@ -587,18 +595,34 @@ async function exifFor(item, s, p, w, hh) {
   tags.exif[0xA002] = { type: 4, val: w }; tags.exif[0xA003] = { type: 4, val: hh };
   return tags;
 }
+const itemRawSize = new Map();
 /** Renders one photo with its edits at the export size and returns the finished file. */
 async function exportOne(item, p, knownStats, s, name) {
-  const bmp = await bitmapOf(item.blob);
-  const fullW = bmpW(bmp), fullH = bmpH(bmp);
+  // RAW: develop at the size the export needs (full sensor resolution unless smaller is enough).
+  let bmp, rawDims = null;
+  if (await isRawBlob(item.blob)) {
+    let size = itemRawSize.get(item.id);
+    if (!size && item.id === S.currentId && S.fullW) size = { fullW: S.fullW, fullH: S.fullH };
+    if (!size) { const probe = await developRaw(item.blob, THUMB_EDGE, THUMB_EDGE); size = { fullW: probe.fullW, fullH: probe.fullH }; }
+    itemRawSize.set(item.id, size);
+    rawDims = [size.fullW, size.fullH];
+  } else bmp = await bitmapOf(item.blob);
+  const fullW = rawDims ? rawDims[0] : bmpW(bmp), fullH = rawDims ? rawDims[1] : bmpH(bmp);
   const [bw, bh] = p.rotation % 180 === 0 ? [fullW, fullH] : [fullH, fullW];
   const r = M.cropRect(p, bw, bh);
   const cw = Math.max(1, Math.round((r[2] - r[0]) * bw)), ch = Math.max(1, Math.round((r[3] - r[1]) * bh));
   const [tw, th] = M.targetSize(cw, ch, s, exportLimit(fullW, fullH, cw, ch));
   // Decode only as many pixels as the output needs (the crop is rendered at about the export size).
   const k = Math.min(1, tw / cw);
-  const src = pixelsOf(bmp, Math.max(1, Math.round(fullW * k)), Math.max(1, Math.round(fullH * k)));
-  if (bmp.close) bmp.close();
+  const sw = Math.max(1, Math.round(fullW * k)), sh = Math.max(1, Math.round(fullH * k));
+  let src;
+  if (rawDims) {
+    const dev = await developRaw(item.blob, Math.max(sw, sh), 0);
+    src = dev.img.w === sw && dev.img.h === sh ? dev.img : pixelsOf(imgToCanvas(packImg(dev.img)), sw, sh);
+  } else {
+    src = pixelsOf(bmp, sw, sh);
+    if (bmp.close) bmp.close();
+  }
   const res = await W.run('export', { type: 'export', img: packImg(src), params: p, stats: knownStats, tw, th, sharpen: s.sharpen, sharpenLevel: s.sharpenLevel }, [src.data.buffer]);
   const cv = imgToCanvas(res.img);
   drawWatermark(cv, s);

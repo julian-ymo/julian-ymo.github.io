@@ -1,0 +1,27 @@
+{
+  "releases": [
+    {
+      "version": "v1.2",
+      "date": "26 Nov 2026",
+      "groups": [
+        {
+          "label": "Android app",
+          "items": [
+            "Edit RAW files: RAF, DNG, CR2/CR3, NEF, ARW, ORF, RW2 and more",
+            "Supports newer cameras like X-T5, X-T50, X-H2, X-S20, X100VI and GFX 100 II",
+            "Better RAW exposure with no clipped highlights, and a RAW badge in the Studio",
+            "Import skips files that aren't photos"
+          ]
+        },
+        {
+          "label": "Web version",
+          "items": [
+            "Edit RAW files, the same way as the Android app",
+            "Camera info from RAW files is kept when you export",
+            "Works offline and can be installed like an app"
+          ]
+        }
+      ]
+    }
+  ]
+}

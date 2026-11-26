@@ -7,7 +7,17 @@
   /** Camera info and GPS from a JPEG's EXIF, or null. Values keep their EXIF types. */
   F.readExif = function (buf) {
     const v = new DataView(buf);
-    if (v.byteLength < 4 || v.getUint16(0) !== 0xFFD8) return null;
+    if (v.byteLength < 100) return null;
+    // TIFF-based RAW (DNG, NEF, CR2, ARW, ORF, PEF…): the file itself is the EXIF block.
+    const b0 = v.getUint16(0);
+    if (b0 === 0x4949 || b0 === 0x4D4D) return parseTiff(v, 0, v.byteLength);
+    // Fujifilm RAF: the camera info lives in the embedded JPEG (offset at byte 84).
+    if (String.fromCharCode(...new Uint8Array(buf, 0, 15)) === 'FUJIFILMCCD-RAW') {
+      const off = v.getUint32(84), len = v.getUint32(88);
+      if (off > 0 && off + len <= v.byteLength) return F.readExif(buf.slice(off, off + len));
+      return null;
+    }
+    if (v.getUint16(0) !== 0xFFD8) return null;
     let o = 2;
     while (o + 4 < v.byteLength) {
       if (v.getUint8(o) !== 0xFF) return null;

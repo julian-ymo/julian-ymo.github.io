@@ -4,6 +4,7 @@ const M = FDM, F = FDF;
 const C = { bg: '#0B0B0C', surface: '#17181A', surface2: '#222326', line: '#2E3034', text: '#F1F0EC', muted: '#A3A39E', amber: '#F2A33A', onAmber: '#1A1206' };
 const PREVIEW_EDGE = 1440, THUMB_EDGE = 200, STUDIO_THUMB_EDGE = 360;
 const IS_IOS = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const RAW_ACCEPT = '.raf,.dng,.cr2,.cr3,.crw,.nef,.nrw,.arw,.srf,.sr2,.orf,.rw2,.raw,.pef,.srw,.3fr,.fff,.iiq,.rwl,.x3f,.erf,.kdc,.dcr,.mrw,.mos,.mef';
 const MAX_EXPORT_PIXELS = IS_IOS ? 16e6 : ((navigator.deviceMemory || 8) <= 4 ? 24e6 : 60e6);
 
 // ------------------------------------------------------------------ DOM helpers
@@ -93,8 +94,8 @@ function loadRecipes() {
 const W = {
   main: null, thumbs: null, jobs: new Map(), jobSeq: 0,
   init() {
-    this.main = new Worker('worker.js?v=4');
-    this.thumbs = new Worker('worker.js?v=4');
+    this.main = new Worker('worker.js?v=5');
+    this.thumbs = new Worker('worker.js?v=5');
     this.main.onmessage = e => onMainWorker(e.data);
     this.thumbs.onmessage = e => this.route(e.data);
     this.exportW = null;
@@ -103,7 +104,7 @@ const W = {
     const j = this.jobs.get(m.job);
     if (!j) return;
     if (m.type === 'thumb') j.onThumb && j.onThumb(m);
-    else if (m.type === 'thumbsDone' || m.type === 'exported' || m.type === 'resized') { this.jobs.delete(m.job); j.resolve(m); }
+    else if (m.type === 'thumbsDone' || m.type === 'exported' || m.type === 'resized' || m.type === 'rawDone') { this.jobs.delete(m.job); j.resolve(m); }
     else if (m.type === 'error') { this.jobs.delete(m.job); j.reject(new Error(m.message)); }
   },
   /** Runs a job on the background worker (thumbnails) or a fresh export worker. */
@@ -113,8 +114,12 @@ const W = {
       this.jobs.set(job, { resolve, reject, onThumb });
       let w = this.thumbs;
       if (target === 'export') {
-        if (!this.exportW) { this.exportW = new Worker('worker.js?v=4'); this.exportW.onmessage = e => this.route(e.data); }
+        if (!this.exportW) { this.exportW = new Worker('worker.js?v=5'); this.exportW.onmessage = e => this.route(e.data); }
         w = this.exportW;
+      } else if (target === 'raw') {
+        // RAW develops one at a time in their own worker (they are big).
+        if (!this.rawW) { this.rawW = new Worker('worker.js?v=5'); this.rawW.onmessage = e => this.route(e.data); }
+        w = this.rawW;
       }
       w.postMessage(Object.assign({ job }, msg), transfer || []);
     });
@@ -150,7 +155,26 @@ function pixelsOf(bmp, tw, th) {
   const d = g.getImageData(0, 0, tw, th);
   return { w: tw, h: th, data: d.data };
 }
+/** True when [blob] is a camera RAW (by name / type, or the Fujifilm RAF header). Cached per blob. */
+const rawCache = new WeakMap();
+async function isRawBlob(blob) {
+  if (!blob) return false;
+  if (rawCache.has(blob)) return rawCache.get(blob);
+  let raw = FDR.isRawName(blob.name, blob.type);
+  if (!raw && !/^image\/(jpe?g|png|webp|gif|bmp|avif|hei[cf])$/i.test(blob.type || '')) {
+    try { raw = FDR.isRawHeader(new Uint8Array(await blob.slice(0, 16).arrayBuffer())); } catch (_) { }
+  }
+  rawCache.set(blob, raw);
+  return raw;
+}
+/** Develops a RAW in the background. Half-size develop when [maxEdge] allows (as in the app). */
+async function developRaw(blob, maxEdge, fit) {
+  const buf = await blob.arrayBuffer();
+  const m = await W.run('raw', { type: 'raw', buf, maxEdge, fit }, [buf]);
+  return { img: { w: m.img.w, h: m.img.h, data: new Uint8ClampedArray(m.img.buf) }, fullW: m.fullW, fullH: m.fullH };
+}
 async function decodeBlob(blob, maxEdge) {
+  if (await isRawBlob(blob)) return developRaw(blob, maxEdge, maxEdge);
   const bmp = await bitmapOf(blob);
   const w = bmpW(bmp), hh = bmpH(bmp);
   const k = Math.min(1, maxEdge / Math.max(w, hh));

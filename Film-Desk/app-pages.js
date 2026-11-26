@@ -279,6 +279,7 @@ async function boot() {
   await loadStudio();
   render();
   const file = document.getElementById('file');
+  file.accept = 'image/*,' + RAW_ACCEPT; // camera RAW too (RAF, DNG, CR2/CR3, NEF, ARW…)
   file.addEventListener('change', () => { if (file.files && file.files.length) importFiles(file.files); });
   // Drag and drop photos anywhere on the Studio.
   let depth = 0;
@@ -305,5 +306,7 @@ async function boot() {
   let rt = 0;
   window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (S.screen === 'editor' && !S.dragging) render(); }, 120); });
   if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {});
+  // Offline support: keep a copy of the app on this device.
+  if ('serviceWorker' in navigator && location.protocol !== 'file:') navigator.serviceWorker.register('sw.js').catch(() => {});
 }
 boot();

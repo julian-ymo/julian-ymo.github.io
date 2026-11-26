@@ -5,6 +5,7 @@ Ported from the latest Android build (branch `fix/build-errors`, Nov 23 2026).
 
 **Open it:** https://julian-ymo.github.io/Film-Desk/
 
+- **RAW** — camera RAW files (Fujifilm RAF, DNG, CR2/CR3, NEF, ARW, ORF, RW2…) develop like in the app: LibRaw, camera white balance, camera-based exposure with a soft highlight shoulder. RAW badge in the Studio, camera info kept on export.
 - **Studio** — import photos (button, drag and drop, or paste), filters, select, copy/paste edits, recipes, batch export (ZIP), reset, remove with undo.
 - **Film** — 20 film simulations with live thumbnails of your photo, strength, hold to compare.
 - **Q Menu** — every Fujifilm setting as round dials: exposure, grain, Color Chrome / FX Blue, white balance + WB shift pad, DR, D-Range Priority, highlight/shadow, colour, sharpness, NR, clarity, mono WC/MG, smooth skin.
@@ -19,3 +20,8 @@ The image engine (`engine.js`) is a line-by-line port of `engine/ImageEngine.kt`
 49³ lookup table per simulation for speed (within 1–4 levels of the exact maths).
 
 Icons: Material Icons by Google (Apache License 2.0), subset.
+
+RAW support uses [LibRaw](https://www.libraw.org) 0.22.3 (CDDL 1.0, see `LibRaw-LICENSE.CDDL`), the same source as the Android
+app (`app/src/main/cpp/LibRaw` on the `fix/build-errors` branch), compiled unchanged to WebAssembly (`libraw.wasm`) with
+`raw_wasm.cpp` as the bridge (a port of the app's `raw_jni.cpp`). Built with clang 18, wasi-sdk 27's sysroot and LLVM 20.1.8's
+libc++abi / libunwind for WebAssembly exceptions.

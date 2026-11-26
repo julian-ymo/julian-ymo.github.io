@@ -53,7 +53,7 @@ function renderStudio() {
   if (!all.length) {
     scr.append(h('div', { class: 'empty' }, icon('photo_library', 48),
       h('h2', null, 'Your Studio is empty'),
-      h('p', null, 'Import photos to edit them. Each photo keeps its own edits, and you can copy edits from one photo and paste them onto others. You can also drop photos here.'),
+      h('p', null, 'Import photos to edit them — JPEG, HEIC or camera RAW (RAF, DNG, CR2/CR3, NEF, ARW…). Each photo keeps its own edits, and you can copy edits from one photo and paste them onto others. You can also drop photos here.'),
       h('button', { class: 'btn primary', onclick: pickFiles }, icon('add'), 'Import photos')),
       h('div', { class: 'footer-note' }, 'Your photos stay on this device — nothing is uploaded.'));
   } else {
@@ -104,7 +104,8 @@ function studioCell(it) {
   h('div', { class: 'inner' },
     S.missing.has(it.id) ? h('div', { class: 'empty', style: { padding: '4px', gap: '2px' } }, icon('broken_image'), h('div', { class: 'muted', style: { fontSize: '10px' } }, 'Can’t open'))
       : url ? h('img', { src: url, alt: '' }) : null,
-    it.params ? h('div', { class: 'code' }, M.simCode(it.params.sim)) : null),
+    it.params ? h('div', { class: 'code' }, M.simCode(it.params.sim)) : null,
+    it.raw && !selecting ? h('div', { class: 'rawbadge' }, 'RAW') : null),
   selecting && S.clipboard && S.clipboard.fromId === it.id ? h('div', { class: 'copied' }, 'COPIED') : null,
   selecting ? h('div', { class: 'check' }, sel ? icon('check') : null) : null);
   return cell;
@@ -179,15 +180,17 @@ function saveRecipeDialog() {
 function previewArea() {
   if (!EL.preview) { EL.preview = h('canvas', { 'aria-label': 'Photo preview', role: 'img' }); EL.orig = h('canvas', { class: 'orig', 'aria-hidden': 'true' }); }
   const sim = M.FILM_SIMS[S.params.sim];
-  const tag = h('div', { class: 'simtag' }, sim.short.toUpperCase() + (S.params.simStrength < 1 ? ' · ' + Math.round(S.params.simStrength * 100) + '%' : ''));
-  live(() => { tag.textContent = M.FILM_SIMS[S.params.sim].short.toUpperCase() + (S.params.simStrength < 1 ? ' · ' + Math.round(S.params.simStrength * 100) + '%' : ''); });
+  const tagText = orig => (S.currentIsRaw ? 'RAW · ' : '') + (orig ? 'ORIGINAL' : M.FILM_SIMS[S.params.sim].short.toUpperCase() + (S.params.simStrength < 1 ? ' · ' + Math.round(S.params.simStrength * 100) + '%' : ''));
+  const tag = h('div', { class: 'simtag' }, tagText(false));
+  live(() => { tag.textContent = tagText(false); });
   const area = h('div', { class: 'preview' + (S.picker ? ' picking' : '') }, EL.preview, EL.orig, tag,
     h('div', { class: 'busy', id: 'busy' }, S.rendering && !S.loading ? h('div', { class: 'spinner sm' }) : null),
-    S.loading || !S.previewImg ? h('div', { class: 'center' }, h('div', { class: 'spinner' })) : null,
+    S.loading || !S.previewImg ? h('div', { class: 'center', style: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' } }, h('div', { class: 'spinner' }),
+      S.loading && S.currentIsRaw ? h('div', { class: 'mono muted', style: { fontSize: '11px' } }, 'DEVELOPING RAW…') : null) : null,
     S.picker && !S.loading ? h('div', { class: 'bottom-badge badge' }, 'TAP TO SAMPLE A COLOUR') : null);
   const showOrig = on => {
     area.classList.toggle('showing-orig', on && !!S.origImg);
-    tag.textContent = on && S.origImg ? 'ORIGINAL' : M.FILM_SIMS[S.params.sim].short.toUpperCase() + (S.params.simStrength < 1 ? ' · ' + Math.round(S.params.simStrength * 100) + '%' : '');
+    tag.textContent = tagText(on && !!S.origImg);
   };
   area.addEventListener('pointerdown', e => {
     if (S.picker) {
