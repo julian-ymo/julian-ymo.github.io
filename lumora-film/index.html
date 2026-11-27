@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lumora Film – film looks for every frame</title>
+<meta name="description" content="Lumora Film is a free photo editor with 20 classic film simulations, a camera-style Q menu, pro tools, recipes and RAW editing. For Android, PC and tablet.">
+<meta property="og:title" content="Lumora Film – film looks for every frame">
+<meta property="og:description" content="Free photo editor with 20 classic film simulations, RAW editing, a Q menu and pro tools. Android and web.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://julian-ymo.github.io/lumora-film/">
+<meta property="og:image" content="https://julian-ymo.github.io/lumora-film/images/cover-classic-neg.jpg">
+<link rel="canonical" href="https://julian-ymo.github.io/lumora-film/">
+<meta name="theme-color" content="#F6F1E9">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' rx='44' fill='%23F4EDE3'/%3E%3Cg fill='none' stroke='%23221A15' stroke-width='9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M44 72V48h24M132 48h24v24M156 128v24h-24M68 152H44v-24'/%3E%3C/g%3E%3Ccircle cx='112' cy='94' r='30' fill='%23E0702A'/%3E%3Crect x='58' y='132' width='84' height='6' rx='3' fill='%23221A15'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="/Film-Desk/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F6F1E9}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+a{color:#1E1915}a:hover{color:#B4531A}
+:focus-visible{outline:2px solid #B4531A;outline-offset:3px}
+#film-list button:hover span:nth-child(2){color:#B4531A}
+@media (max-width:700px){
+  header{padding:16px 20px !important}
+  header span{font-size:22px !important}
+  [style*="padding: 96px 32px"],[style*="padding: 104px 32px"]{padding:64px 20px !important}
+  [style*="padding: 56px 32px 96px"]{padding:40px 20px 64px !important}
+  h2{font-size:38px !important}
+  #top [style*="height: 640px"]{height:300px !important}
+  #film-list button span:last-child{display:none}
+  #top figcaption{padding-left:20px !important;padding-right:20px !important}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}#look-svg{transition:none !important}}
+</style>
+</head>
+<body>
+<main style="background: #F6F1E9; color: #1E1915; font-family: Inter, system-ui, sans-serif; font-size: 17px; line-height: 1.65; min-height: 100vh">
+
+<header style="max-width: 1240px; margin: 0 auto; padding: 22px 32px; display: flex; flex-wrap: wrap; align-items: center; gap: 18px 32px; border-bottom: 2px solid #1E1915">
+<a href="#top" style="display: flex; align-items: center; gap: 14px; text-decoration: none">
+<svg width="40" height="40" viewBox="0 0 200 200" aria-hidden="true"><rect width="200" height="200" rx="44" fill="#1E1915"></rect><g fill="none" stroke="#F4EDE3" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"><path d="M44 72V48h24M132 48h24v24M156 128v24h-24M68 152H44v-24"></path></g><circle cx="112" cy="94" r="30" fill="#E0702A"></circle><rect x="58" y="132" width="84" height="6" rx="3" fill="#F4EDE3"></rect></svg>
+<span style="font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 30px; letter-spacing: 0.14em; color: #1E1915">LUMORA FILM</span>
+</a>
+<nav style="display: flex; flex-wrap: wrap; gap: 6px 26px; margin-left: auto; font-size: 15px">
+<a href="#films" style="text-decoration: none; color: #4A423B">The films</a>
+<a href="#inside" style="text-decoration: none; color: #4A423B">Inside</a>
+<a href="#how" style="text-decoration: none; color: #4A423B">How it works</a>
+<a href="#notes" style="text-decoration: none; color: #4A423B">What's new</a>
+<a href="#faq" style="text-decoration: none; color: #4A423B">Q&amp;A</a>
+</nav>
+<a href="#download" style="background: #1E1915; color: #F6F1E9; text-decoration: none; font-weight: 600; font-size: 15px; padding: 12px 22px; border-radius: 999px">Get the app</a>
+</header>
+
+<section id="top">
+<figure style="margin: 0">
+<div style="height: 640px; overflow: hidden; background: #2E3A5C">
+<img src="images/cover-classic-neg.jpg" width="2000" height="1125" fetchpriority="high" alt="Mt Fuji at sunset under orange clouds, edited in Lumora Film with Classic Neg" style="width: 100%; height: 100%; object-fit: cover; object-position: center 70%; display: block">
+</div>
+<figcaption style="max-width: 1240px; margin: 0 auto; padding: 10px 32px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.05em; color: #6B625A">ON THE COVER — MT FUJI AT SUNSET, EDITED IN LUMORA FILM · CLASSIC NEG · GRAIN WEAK · DR400 · PHOTO: <a href="https://unsplash.com/photos/snow-capped-mount-fuji-at-sunrise-with-vibrant-clouds-zHRlfpTGXx8" style="color: #6B625A">JAYESH PATEL ON UNSPLASH</a></figcaption>
+</figure>
+
+<div style="max-width: 1240px; margin: 0 auto; padding: 56px 32px 96px; display: flex; flex-wrap: wrap; gap: 48px 72px; align-items: flex-end">
+<div style="flex: 1 1 600px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<a href="#notes" style="align-self: flex-start; text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.05em; color: #B4531A; border-bottom: 1px solid #B4531A; padding-bottom: 2px">NEW IN V1.2.1 — FILM DESK IS NOW LUMORA FILM →</a>
+<h1 style="margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 400; font-size: clamp(56px, 8vw, 112px); line-height: 0.98; letter-spacing: -0.02em">Film looks,<br><em style="font-style: italic; color: #B4531A">for every frame.</em></h1>
+</div>
+<div style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 22px; padding-bottom: 8px">
+<p style="margin: 0; font-family: Fraunces, Georgia, serif; font-size: 22px; line-height: 1.5; color: #3A332D">Twenty classic film simulations and real in-camera settings, for your JPEG and RAW photos. On your phone, or on any screen in a browser.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a href="https://1024terabox.com/s/1sChgR7L5uVajNcm6HftlpA" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 10px; background: #1E1915; color: #F6F1E9; text-decoration: none; font-weight: 600; padding: 15px 24px; border-radius: 999px">Download for Android <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; opacity: 0.75" data-version>v1.2.1</span></a>
+<a href="https://julian-ymo.github.io/Film-Desk/" style="display: inline-flex; align-items: center; gap: 10px; border: 1.5px solid #1E1915; color: #1E1915; text-decoration: none; font-weight: 600; padding: 14px 24px; border-radius: 999px">Open on PC or tablet</a>
+</div>
+<p style="margin: 0; font-size: 14px; color: #6B625A">Free · No account · Photos never leave your device</p>
+</div>
+</div>
+</section>
+
+<section id="films" style="background: #EFE7DB; border-top: 1px solid #D9CFC2; border-bottom: 1px solid #D9CFC2">
+<div style="max-width: 1240px; margin: 0 auto; padding: 96px 32px; display: flex; flex-direction: column; gap: 48px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px; border-bottom: 1px solid #1E1915; padding-bottom: 20px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.06em; color: #B4531A">NO. 01 — THE FILMS</span>
+<h2 style="margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 400; font-size: 60px; line-height: 1.05; letter-spacing: -0.02em">Twenty films. <em style="font-style: italic">One tap each.</em></h2>
+</div>
+<span style="font-size: 15px; color: #6B625A; max-width: 320px">Tap a film on the right to see it on the photo.</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 48px; align-items: flex-start">
+<figure style="margin: 0; flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+<div style="aspect-ratio: 4 / 5; overflow: hidden; background: #2B2A2E">
+<svg width="100%" height="100%" viewBox="0 0 240 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="City street at dusk with the selected film" id="look-svg" style="filter: saturate(0.85) contrast(1.2) hue-rotate(-8deg) sepia(0.15); transition: filter 0.35s ease"><rect width="240" height="300" fill="#E9A980"></rect><circle cx="170" cy="70" r="28" fill="#F6D08A"></circle><rect x="0" y="90" width="70" height="210" fill="#3E4A5C"></rect><rect x="70" y="130" width="60" height="170" fill="#7A4B3F"></rect><rect x="130" y="105" width="50" height="195" fill="#4F6A6B"></rect><rect x="180" y="150" width="60" height="150" fill="#8C6A4E"></rect><rect x="14" y="115" width="12" height="16" fill="#F2C766"></rect><rect x="40" y="145" width="12" height="16" fill="#F2C766"></rect><rect x="14" y="180" width="12" height="16" fill="#F2C766"></rect><rect x="86" y="160" width="10" height="14" fill="#F2C766"></rect><rect x="108" y="195" width="10" height="14" fill="#F2C766"></rect><rect x="144" y="135" width="10" height="14" fill="#F2C766"></rect><rect x="196" y="180" width="12" height="14" fill="#F2C766"></rect><rect x="0" y="250" width="240" height="50" fill="#2B2A2E"></rect><rect x="20" y="272" width="30" height="4" fill="#D9D2C5"></rect><rect x="105" y="272" width="30" height="4" fill="#D9D2C5"></rect><rect x="190" y="272" width="30" height="4" fill="#D9D2C5"></rect><rect x="150" y="222" width="44" height="28" rx="6" fill="#C2473A"></rect><circle cx="160" cy="252" r="6" fill="#121110"></circle><circle cx="184" cy="252" r="6" fill="#121110"></circle></svg>
+</div>
+<figcaption aria-live="polite" style="display: flex; flex-direction: column; gap: 4px"><span style="display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline"><span id="look-name" style="font-family: Fraunces, Georgia, serif; font-size: 26px">Classic Neg</span><span id="look-note" style="font-family: Fraunces, Georgia, serif; font-style: italic; font-size: 18px; color: #6B625A">Hard, nostalgic</span></span></figcaption>
+</figure>
+<div role="group" aria-label="Film simulations" style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column">
+<div id="film-list"></div>
+<p style="margin: 16px 0 0; font-size: 14px; color: #6B625A">…and twelve more in the app, including Reala Ace.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="inside">
+<div style="max-width: 1240px; margin: 0 auto; padding: 96px 32px; display: flex; flex-direction: column; gap: 56px">
+<div style="display: flex; flex-direction: column; gap: 10px; border-bottom: 1px solid #1E1915; padding-bottom: 20px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.06em; color: #B4531A">NO. 02 — INSIDE THE APP</span>
+<h2 style="margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 400; font-size: 60px; line-height: 1.05; letter-spacing: -0.02em">Edit the way <em style="font-style: italic">you shoot.</em></h2>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px 56px">
+<article style="display: flex; flex-direction: column; gap: 10px; border-top: 3px solid #E0702A; padding-top: 18px">
+<div style="display: flex; align-items: baseline; gap: 12px"><h3 style="margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 26px">RAW editing</h3><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.06em; color: #B4531A">NEW</span></div>
+<p style="margin: 0; color: #4A423B">Open RAF, DNG, CR3, NEF, ARW and other RAW files on Android or the web. Each one opens with the white balance you shot with, then every tool works as usual.</p>
+</article>
+<article style="display: flex; flex-direction: column; gap: 10px; border-top: 1px solid #1E1915; padding-top: 18px">
+<h3 style="margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 26px">Q menu</h3>
+<p style="margin: 0; color: #4A423B">Grain, color chrome, white balance shift, dynamic range, highlight and shadow tone, all on one screen like a camera.</p>
+</article>
+<article style="display: flex; flex-direction: column; gap: 10px; border-top: 1px solid #1E1915; padding-top: 18px">
+<h3 style="margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 26px">Pro tools</h3>
+<p style="margin: 0; color: #4A423B">Curves, exposure, 8-band color, vignette and glow, for when a film look is only the starting point.</p>
+</article>
+</div>
+
+<blockquote style="margin: 8px 0; padding: 40px 0; border-top: 1px solid #D9CFC2; border-bottom: 1px solid #D9CFC2; text-align: center">
+<p style="margin: 0 auto; max-width: 900px; font-family: Fraunces, Georgia, serif; font-style: italic; font-size: clamp(30px, 4vw, 46px); line-height: 1.25">“Every camera setting on one screen, just like the quick menu on a real camera.”</p>
+</blockquote>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px 56px">
+<article style="display: flex; flex-direction: column; gap: 10px; border-top: 1px solid #1E1915; padding-top: 18px">
+<h3 style="margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 26px">Recipes</h3>
+<p style="margin: 0; color: #4A423B">Save the settings you love as a recipe and apply them to any photo in one tap. Share them with friends as text.</p>
+</article>
+<article style="display: flex; flex-direction: column; gap: 10px; border-top: 1px solid #1E1915; padding-top: 18px">
+<h3 style="margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 26px">Crop and export</h3>
+<p style="margin: 0; color: #4A423B">Frame with crop and straighten, then save JPEG, PNG or WebP at full quality, with your camera info kept.</p>
+</article>
+<article style="display: flex; flex-direction: column; gap: 10px; border-top: 1px solid #1E1915; padding-top: 18px">
+<h3 style="margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 26px">Phone, PC and tablet</h3>
+<p style="margin: 0; color: #4A423B">Use the Android app, or open the web version in any browser. Both edit RAW files, and nothing leaves your device.</p>
+</article>
+</div>
+</div>
+</section>
+
+<section id="how" style="border-top: 1px solid #D9CFC2">
+<div style="max-width: 1240px; margin: 0 auto; padding: 96px 32px; display: flex; flex-direction: column; gap: 48px">
+<div style="display: flex; flex-direction: column; gap: 10px; border-bottom: 1px solid #1E1915; padding-bottom: 20px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.06em; color: #B4531A">NO. 03 — HOW IT WORKS</span>
+<h2 style="margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 400; font-size: 60px; line-height: 1.05; letter-spacing: -0.02em">Three steps. <em style="font-style: italic">That's all.</em></h2>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 40px">
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: Fraunces, Georgia, serif; font-size: 88px; line-height: 1; color: #E0702A">1</span><h3 style="margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 26px">Open a photo</h3><p style="margin: 0; color: #4A423B">Pick a JPEG or RAW file from your gallery or files.</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: Fraunces, Georgia, serif; font-size: 88px; line-height: 1; color: #E0702A">2</span><h3 style="margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 26px">Choose a film</h3><p style="margin: 0; color: #4A423B">Tap a simulation, then fine-tune it in the Q menu.</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: Fraunces, Georgia, serif; font-size: 88px; line-height: 1; color: #E0702A">3</span><h3 style="margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 26px">Save and share</h3><p style="margin: 0; color: #4A423B">Export at full quality, ready for Instagram or print.</p></div>
+</div>
+</div>
+</section>
+
+<section id="notes" style="background: #EFE7DB; border-top: 1px solid #D9CFC2; border-bottom: 1px solid #D9CFC2">
+<div style="max-width: 1240px; margin: 0 auto; padding: 96px 32px; display: flex; flex-wrap: wrap; gap: 40px 72px">
+<div style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.06em; color: #B4531A">NO. 04 — WHAT'S NEW</span>
+<h2 style="margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 400; font-size: 52px; line-height: 1.05; letter-spacing: -0.02em">Latest <em style="font-style: italic">updates.</em></h2>
+<p style="margin: 8px 0 0; color: #6B625A">Every update, newest first.</p>
+</div>
+<div id="update-list" style="flex: 2 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 40px">
+<article style="display: flex; flex-direction: column; gap: 22px; border-top: 1px solid #1E1915; padding-top: 20px">
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 14px">
+<h3 style="margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 36px">Version 1.2.1</h3>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.05em; background: #1E1915; color: #F6F1E9; padding: 3px 10px; border-radius: 999px">LATEST</span>
+<span style="margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #6B625A">27 NOV 2026</span>
+</div>
+<ul style="margin: 0; padding-left: 18px; color: #3A332D; display: flex; flex-direction: column; gap: 6px">
+<li>New name: Film Desk is now Lumora Film, with a new Viewfinder icon</li>
+<li>Exported photos are saved in Pictures/LumoraFilm</li>
+<li>Installs over the old app, so your recipes and settings stay</li>
+</ul>
+</article>
+<article style="display: flex; flex-direction: column; gap: 22px; border-top: 1px solid #D9CFC2; padding-top: 20px">
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 14px">
+<h3 style="margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 28px">Version 1.2</h3>
+<span style="margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #6B625A">26 NOV 2026</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px 40px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.06em; color: #6B625A">ANDROID APP</span>
+<ul style="margin: 0; padding-left: 18px; color: #3A332D; display: flex; flex-direction: column; gap: 6px">
+<li>Edit RAW files: RAF, DNG, CR2/CR3, NEF, ARW, ORF, RW2 and more</li>
+<li>Supports newer cameras like X-T5, X100VI and GFX 100 II</li>
+<li>Better RAW exposure with no clipped highlights</li>
+<li>Import skips files that aren't photos</li>
+</ul>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.06em; color: #6B625A">WEB VERSION</span>
+<ul style="margin: 0; padding-left: 18px; color: #3A332D; display: flex; flex-direction: column; gap: 6px">
+<li>Edit RAW files, the same way as the app</li>
+<li>Camera info from RAW files is kept on export</li>
+<li>Works offline and installs like an app</li>
+</ul>
+</div>
+</div>
+</article>
+</div>
+</div>
+</section>
+
+<section id="download" style="background: #1E1915; color: #F6F1E9">
+<div style="max-width: 1240px; margin: 0 auto; padding: 104px 32px; display: flex; flex-wrap: wrap; align-items: flex-end; gap: 40px 72px">
+<div style="flex: 1 1 560px; display: flex; flex-direction: column; gap: 16px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.06em; color: #E0702A">FREE · ANDROID · WEB</span>
+<h2 style="margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 400; font-size: clamp(52px, 7vw, 96px); line-height: 1; letter-spacing: -0.02em; color: #F6F1E9">Get Lumora Film, <em style="font-style: italic; color: #E0702A">free.</em></h2>
+</div>
+<div style="flex: 0 1 340px; display: flex; flex-direction: column; gap: 12px">
+<a href="https://1024terabox.com/s/1sChgR7L5uVajNcm6HftlpA" target="_blank" rel="noopener" style="display: flex; justify-content: space-between; align-items: center; background: #F6F1E9; color: #1E1915; text-decoration: none; font-weight: 600; padding: 18px 24px; border-radius: 999px">Download for Android <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px" data-version>v1.2.1</span></a>
+<a href="https://julian-ymo.github.io/Film-Desk/" style="display: flex; justify-content: space-between; align-items: center; border: 1.5px solid #F6F1E9; color: #F6F1E9; text-decoration: none; font-weight: 600; padding: 17px 24px; border-radius: 999px">Open on PC or tablet <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px" data-version>v1.2.1</span></a>
+<p style="margin: 4px 0 0; font-size: 14px; color: #B5AA9C">The Android download opens on TeraBox.</p>
+</div>
+</div>
+</section>
+
+<section id="faq">
+<div style="max-width: 1240px; margin: 0 auto; padding: 96px 32px; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-direction: column; gap: 10px; border-bottom: 1px solid #1E1915; padding-bottom: 20px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.06em; color: #B4531A">NO. 05 — QUESTIONS</span>
+<h2 style="margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 400; font-size: 60px; line-height: 1.05; letter-spacing: -0.02em">Questions &amp; <em style="font-style: italic">answers.</em></h2>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 36px 64px">
+<div style="display: flex; flex-direction: column; gap: 8px"><h3 style="margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 22px">Is this the same app as Film Desk?</h3><p style="margin: 0; color: #4A423B">Yes. Film Desk is now called Lumora Film, with a new name and logo. The new version installs over the old one, so your recipes and settings stay.</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><h3 style="margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 22px">Is Lumora Film free?</h3><p style="margin: 0; color: #4A423B">Yes. Lumora Film is free to download and use. In a future update, it will show some ads to help keep it free.</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><h3 style="margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 22px">Can I edit RAW files?</h3><p style="margin: 0; color: #4A423B">Yes, in the Android app and the web version: RAF, DNG, CR2/CR3, NEF, ARW, ORF, RW2 and more. In the app, use Files on the Import screen if the photo picker doesn't show them.</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><h3 style="margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 22px">How do I install the APK?</h3><p style="margin: 0; color: #4A423B">Tap "Download for Android". It opens the file on TeraBox: download the APK, open it, and allow installs when Android asks. New versions install over the old one.</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><h3 style="margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 22px">How do I install it from my browser?</h3><p style="margin: 0; color: #4A423B">Open the web version, then add it like an app. It gets its own icon, and once it's installed you can use it offline, with no internet connection.</p><ul style="margin: 0; padding-left: 18px; color: #4A423B; display: flex; flex-direction: column; gap: 4px"><li><b style="font-weight: 600; color: #1E1915">PC or Mac (Chrome, Edge):</b> click the install icon at the right end of the address bar, or open the browser menu and choose Install.</li><li><b style="font-weight: 600; color: #1E1915">iPhone or iPad (Safari):</b> tap Share, then Add to Home Screen.</li></ul></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><h3 style="margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 22px">Are my photos uploaded anywhere?</h3><p style="margin: 0; color: #4A423B">No. Your photos are edited on your own device and never leave it.</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><h3 style="margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 22px">Is it made by a camera company?</h3><p style="margin: 0; color: #4A423B">No. Lumora Film is an independent app and isn't affiliated with or endorsed by any camera maker.</p></div>
+</div>
+</div>
+</section>
+
+<footer style="border-top: 2px solid #1E1915">
+<div style="max-width: 1240px; margin: 0 auto; padding: 32px; display: flex; flex-wrap: wrap; gap: 16px 28px; align-items: center; font-size: 14px; color: #6B625A">
+<span style="font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 20px; letter-spacing: 0.14em; color: #1E1915">LUMORA FILM</span>
+<span>© 2026 Lumora Film · <span data-version>v1.2.1</span></span>
+<span>Mt Fuji photo by <a href="https://unsplash.com/photos/snow-capped-mount-fuji-at-sunrise-with-vibrant-clouds-zHRlfpTGXx8" style="color: #6B625A">Jayesh Patel</a> on Unsplash</span>
+<a href="#download" style="margin-left: auto; color: #4A423B">Download</a>
+<a href="#faq" style="color: #4A423B">Q&amp;A</a>
+</div>
+</footer>
+
+</main>
+<script>
+(function () {
+  var films = [
+    { id: 'orig', name: 'Original', note: 'No film', f: 'none' },
+    { id: 'provia', name: 'Provia', note: 'True to life', f: 'saturate(1.05)' },
+    { id: 'velvia', name: 'Velvia', note: 'Vivid, punchy', f: 'saturate(1.6) contrast(1.15)' },
+    { id: 'astia', name: 'Astia', note: 'Soft, gentle', f: 'saturate(1.1) brightness(1.05) contrast(0.95)' },
+    { id: 'cchrome', name: 'Classic Chrome', note: 'Muted, documentary', f: 'saturate(0.7) contrast(1.1) sepia(0.12)' },
+    { id: 'cneg', name: 'Classic Neg', note: 'Hard, nostalgic', f: 'saturate(0.85) contrast(1.2) hue-rotate(-8deg) sepia(0.15)' },
+    { id: 'eterna', name: 'Eterna', note: 'Soft, cinematic', f: 'saturate(0.6) contrast(0.9) brightness(1.05)' },
+    { id: 'nneg', name: 'Nostalgic Neg', note: 'Warm amber', f: 'sepia(0.3) saturate(1.1) brightness(1.05)' },
+    { id: 'acros', name: 'Acros', note: 'Black and white', f: 'grayscale(1) contrast(1.2)' }
+  ];
+  function el(tag, style, text) { var e = document.createElement(tag); if (style) e.setAttribute('style', style); if (text != null) e.textContent = text; return e; }
+  var list = document.getElementById('film-list'), svg = document.getElementById('look-svg');
+  var nameEl = document.getElementById('look-name'), noteEl = document.getElementById('look-note');
+  var rows = [];
+  function pick(id) {
+    films.forEach(function (f, i) {
+      var on = f.id === id, r = rows[i];
+      r.btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      r.num.style.color = on ? '#B4531A' : '#8A8076';
+      r.name.style.color = on ? '#B4531A' : '#1E1915';
+      r.name.style.fontStyle = on ? 'italic' : 'normal';
+      if (on) { svg.style.filter = f.f; nameEl.textContent = f.name; noteEl.textContent = f.note; }
+    });
+  }
+  films.forEach(function (f, i) {
+    var b = el('button', 'display:flex;align-items:baseline;gap:20px;width:100%;min-height:56px;padding:12px 4px;border:none;border-bottom:1px solid #D9CFC2;background:transparent;color:#1E1915;text-align:left;cursor:pointer;font:inherit');
+    b.type = 'button';
+    var num = el('span', "font-family:'JetBrains Mono',monospace;font-size:13px;width:28px", String(i + 1).padStart(2, '0'));
+    var name = el('span', 'font-family:Fraunces,Georgia,serif;font-size:28px;line-height:1.1;flex:1', f.name);
+    var note = el('span', 'font-size:14px;color:#6B625A', f.note);
+    b.appendChild(num); b.appendChild(name); b.appendChild(note);
+    b.addEventListener('click', function () { pick(f.id); });
+    list.appendChild(b);
+    rows.push({ btn: b, num: num, name: name });
+  });
+  pick('cneg');
+
+  // Version labels and the update list come from updates.json (newest first).
+  fetch('updates.json', { cache: 'no-cache' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (data) {
+    if (!data || !data.releases || !data.releases.length) return;
+    var tags = document.querySelectorAll('[data-version]');
+    for (var i = 0; i < tags.length; i++) tags[i].textContent = data.releases[0].version;
+    var box = document.getElementById('update-list');
+    box.textContent = '';
+    data.releases.forEach(function (rel, idx) {
+      var latest = idx === 0;
+      var a = el('article', 'display:flex;flex-direction:column;gap:' + (latest ? 22 : 18) + 'px;border-top:1px solid ' + (latest ? '#1E1915' : '#D9CFC2') + ';padding-top:20px');
+      var head = el('div', 'display:flex;flex-wrap:wrap;align-items:baseline;gap:14px');
+      head.appendChild(el('h3', 'margin:0;font-family:Fraunces,Georgia,serif;font-weight:600;font-size:' + (latest ? 36 : 28) + 'px', 'Version ' + rel.version.replace(/^v/i, '')));
+      if (latest) head.appendChild(el('span', "font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.05em;background:#1E1915;color:#F6F1E9;padding:3px 10px;border-radius:999px", 'LATEST'));
+      head.appendChild(el('span', "margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:13px;color:#6B625A", String(rel.date).toUpperCase()));
+      a.appendChild(head);
+      var grid = el('div', 'display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px 40px');
+      (rel.groups || []).forEach(function (g) {
+        var col = el('div', 'display:flex;flex-direction:column;gap:8px');
+        col.appendChild(el('span', "font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.06em;color:#6B625A", String(g.label).toUpperCase()));
+        var ul = el('ul', 'margin:0;padding-left:18px;color:#3A332D;display:flex;flex-direction:column;gap:6px');
+        (g.items || []).forEach(function (t) { ul.appendChild(el('li', null, t)); });
+        col.appendChild(ul); grid.appendChild(col);
+      });
+      a.appendChild(grid);
+      box.appendChild(a);
+    });
+  }).catch(function () {});
+})();
+</script>
+</body>
+</html>
