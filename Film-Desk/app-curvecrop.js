@@ -1,4 +1,4 @@
-/* Film Desk web — Curve editor (ui/CurvePanel.kt) and Crop tab (ui/CropPanel.kt). */
+/* Lumora Film web — Curve editor (ui/CurvePanel.kt) and Crop tab (ui/CropPanel.kt). */
 'use strict';
 
 function dragEnded() {

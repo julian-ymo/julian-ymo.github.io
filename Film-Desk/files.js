@@ -1,4 +1,4 @@
-/* Film Desk web — EXIF read/write (JPEG) and a small ZIP writer for batch export. */
+/* Lumora Film web — EXIF read/write (JPEG) and a small ZIP writer for batch export. */
 'use strict';
 (function (G) {
   const F = {};

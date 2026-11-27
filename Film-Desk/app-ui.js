@@ -1,4 +1,4 @@
-/* Film Desk web — screens: Studio, editor, Film tab, Q menu, Pro (ui/StudioScreen.kt, EditorScreen.kt, QMenuPanel.kt, ProPanel.kt). */
+/* Lumora Film web — screens: Studio, editor, Film tab, Q menu, Pro (ui/StudioScreen.kt, EditorScreen.kt, QMenuPanel.kt, ProPanel.kt). */
 'use strict';
 
 const appEl = () => document.getElementById('app');

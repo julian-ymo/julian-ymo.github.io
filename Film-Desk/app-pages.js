@@ -1,4 +1,4 @@
-/* Film Desk web — Recipes and Export screens (ui/RecipesScreen.kt, ui/ExportScreen.kt), and start-up. */
+/* Lumora Film web — Recipes and Export screens (ui/RecipesScreen.kt, ui/ExportScreen.kt), and start-up. */
 'use strict';
 
 // ================================================================== Recipes
@@ -29,8 +29,8 @@ function recipeCard(r) {
 }
 async function shareRecipe(r) {
   const text = M.recipeShareText(r);
-  if (navigator.share) { try { await navigator.share({ text, title: 'Film Desk recipe' }); return; } catch (e) { if (e.name === 'AbortError') return; } }
-  try { await navigator.clipboard.writeText(text); toast('Recipe copied — paste it in a chat; Film Desk (app or web) can import it'); }
+  if (navigator.share) { try { await navigator.share({ text, title: 'Lumora Film recipe' }); return; } catch (e) { if (e.name === 'AbortError') return; } }
+  try { await navigator.clipboard.writeText(text); toast('Recipe copied — paste it in a chat; Lumora Film (app or web) can import it'); }
   catch (_) { dialog('Share recipe', h('textarea', { class: 'field', readonly: true }, text), [{ label: 'Close', onclick: () => {} }]); }
 }
 async function pasteRecipe() {
@@ -194,7 +194,7 @@ function exportSheet(id) {
         else body.push(note('No camera details, location or copyright are saved in the file.'));
         break;
       case 'File name':
-        body.push(h('div', { class: 'row', style: { gap: '6px' } }, h('span', { class: 'muted', style: { fontSize: '14px' } }, 'FilmDesk_'),
+        body.push(h('div', { class: 'row', style: { gap: '6px' } }, h('span', { class: 'muted', style: { fontSize: '14px' } }, 'LumoraFilm_'),
           h('div', { class: 'grow' }, textLine(null, s.folder, '(optional name)', 'fn', t => setExport(Object.assign({}, S.exportSettings, { folder: t.replace(/[^\p{L}\p{N} _-]/gu, '').slice(0, 40) }))))));
         body.push(note('Files are named ' + M.filePrefix(s) + '_date_time. Your browser saves them to Downloads (or asks where).'));
         break;

@@ -1,4 +1,4 @@
-/* Film Desk web — view model: navigation, Studio, editing, history, recipes, export (ui/EditorViewModel.kt). */
+/* Lumora Film web — view model: navigation, Studio, editing, history, recipes, export (ui/EditorViewModel.kt). */
 'use strict';
 
 // ------------------------------------------------------------------ navigation (browser Back works too)
@@ -586,7 +586,7 @@ async function exifFor(item, s, p, w, hh) {
         }
       } catch (_) { }
     }
-    tags.ifd0[0x0131] = F.ascii('Film Desk');
+    tags.ifd0[0x0131] = F.ascii('Lumora Film');
     if (s.embedRecipe) tags.exif[0x9286] = F.userComment('FilmDeskRecipe:' + JSON.stringify(M.toJson(p)));
   }
   const c = s.copyright.trim();
@@ -656,7 +656,7 @@ async function doExport(share) {
     const res = await exportOne(it, p, S.stats, s, M.filePrefix(s) + '_' + stamp());
     const file = new File([res.blob], res.name, { type: res.blob.type });
     if (share && navigator.canShare && navigator.canShare({ files: [file] })) {
-      try { await navigator.share({ files: [file], title: 'Film Desk' }); } catch (e) { if (e.name !== 'AbortError') download(res.blob, res.name); }
+      try { await navigator.share({ files: [file], title: 'Lumora Film' }); } catch (e) { if (e.name !== 'AbortError') download(res.blob, res.name); }
     } else {
       download(res.blob, res.name);
       toast('Saved ' + res.name + ' (' + res.w + ' × ' + res.h + ' · ' + M.formatBytes(res.blob.size) + ')');

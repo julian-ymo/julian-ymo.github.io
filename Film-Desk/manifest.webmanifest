@@ -1,7 +1,7 @@
 {
-  "name": "Film Desk",
-  "short_name": "Film Desk",
-  "description": "Fujifilm-style photo editor: film simulations, Q menu, pro tools, curves, crop, recipes.",
+  "name": "Lumora Film",
+  "short_name": "Lumora Film",
+  "description": "Film-style photo editor: film simulations, Q menu, pro tools, curves, crop, recipes.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

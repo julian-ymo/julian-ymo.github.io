@@ -1,6 +1,6 @@
-# Film Desk — web version
+# Lumora Film (formerly Film Desk) — web version
 
-The Film Desk Android app, running in the browser on PCs, tablets and phones.
+The Lumora Film Android app, running in the browser on PCs, tablets and phones.
 Ported from the latest Android build (branch `fix/build-errors`, Nov 23 2026).
 
 **Open it:** https://julian-ymo.github.io/Film-Desk/

@@ -1,4 +1,4 @@
-/* Film Desk web — core: state, storage, workers, shared controls. Mirrors ui/EditorViewModel.kt and ui/Kit.kt. */
+/* Lumora Film web — core: state, storage, workers, shared controls. Mirrors ui/EditorViewModel.kt and ui/Kit.kt. */
 'use strict';
 const M = FDM, F = FDF;
 const C = { bg: '#0B0B0C', surface: '#17181A', surface2: '#222326', line: '#2E3034', text: '#F1F0EC', muted: '#A3A39E', amber: '#F2A33A', onAmber: '#1A1206' };

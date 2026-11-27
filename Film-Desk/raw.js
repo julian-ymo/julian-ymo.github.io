@@ -1,4 +1,4 @@
-/* Film Desk web — camera RAW (RAF, DNG, CR2/CR3, NEF, ARW, ORF, RW2…) through LibRaw compiled to
+/* Lumora Film web — camera RAW (RAF, DNG, CR2/CR3, NEF, ARW, ORF, RW2…) through LibRaw compiled to
  * WebAssembly (libraw.wasm, LibRaw 0.22.3 under its CDDL 1.0 licence). Develops exactly like the
  * Android app's raw_jni.cpp: camera white balance, sRGB, camera-based exposure with a soft
  * highlight shoulder. A fresh instance per photo, so a damaged file can't leave anything behind. */

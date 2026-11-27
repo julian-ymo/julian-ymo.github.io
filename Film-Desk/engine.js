@@ -1,4 +1,4 @@
-/* Film Desk web — image engine, ported line by line from the Android app's engine/ImageEngine.kt.
+/* Lumora Film web — image engine, ported line by line from the Android app's engine/ImageEngine.kt.
  * Images are { w, h, data: Uint8ClampedArray (RGBA) }. Pure JS, so it behaves the same in every browser. */
 'use strict';
 (function (G) {

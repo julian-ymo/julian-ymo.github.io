@@ -1,4 +1,4 @@
-/* Film Desk web — model (ported from the Android app's model/*.kt). Shared by the page and the render workers. */
+/* Lumora Film web — model (ported from the Android app's model/*.kt). Shared by the page and the render workers. */
 'use strict';
 (function (G) {
   const M = {};
@@ -455,7 +455,7 @@
       r(5, 'Soft Portrait', { sim: 2, smoothSkin: 1, wb: 1, wbShiftR: 1, wbShiftB: -1, highlight: -1, shadow: -1, color: 1 }),
     ];
   };
-  M.recipeShareText = r => 'Film Desk recipe "' + r.name + '"\n' + JSON.stringify({ name: r.name, params: M.toJson(r.params) });
+  M.recipeShareText = r => 'Lumora Film recipe "' + r.name + '"\n' + JSON.stringify({ name: r.name, params: M.toJson(r.params) });
   M.recipeFromText = text => {
     if (!text) return null;
     const s = text.indexOf('{'), e = text.lastIndexOf('}');
@@ -503,7 +503,7 @@
   M.isLossy = s => s.format === 'JPEG' || s.format === 'WEBP';
   M.canLimitSize = s => s.format === 'JPEG' || s.format === 'WEBP';
   M.canWriteMetadata = s => s.format === 'JPEG';
-  M.filePrefix = s => 'FilmDesk' + (M.cleanFolder(s.folder) ? '_' + M.cleanFolder(s.folder).replace(/ /g, '_') : '');
+  M.filePrefix = s => 'LumoraFilm' + (M.cleanFolder(s.folder) ? '_' + M.cleanFolder(s.folder).replace(/ /g, '_') : '');
   M.BUILT_IN_PRESETS = [
     { name: 'JPG Small', builtIn: true, detail: '2048 px · 85', settings: Object.assign(M.exportDefaults(), { quality: 85, sizeMode: 'LongEdge', longEdge: 2048 }) },
     { name: 'JPG Full', builtIn: true, detail: 'Full · 92', settings: Object.assign(M.exportDefaults(), { quality: 92, sizeMode: 'Full' }) },

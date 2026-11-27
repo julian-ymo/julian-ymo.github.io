@@ -1,4 +1,4 @@
-// Film Desk web — RAW bridge. Same develop as the Android app's raw_jni.cpp (LibRaw, camera WB,
+// Lumora Film web — RAW bridge. Same develop as the Android app's raw_jni.cpp (LibRaw, camera WB,
 // sRGB, camera-based exposure + auto gain, soft highlight shoulder, gentle S-curve), but reading
 // the file from memory and writing RGBA for the browser.
 #include <cstdint>
