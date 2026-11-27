@@ -1,6 +1,26 @@
 {
   "releases": [
     {
+      "version": "v1.2.1",
+      "date": "27 Nov 2026",
+      "groups": [
+        {
+          "label": "Android app",
+          "items": [
+            "New name: Film Desk is now Lumora Film, with a new Viewfinder icon",
+            "Exported photos are saved in Pictures/LumoraFilm",
+            "Installs over the old app, so your recipes and settings stay"
+          ]
+        },
+        {
+          "label": "Web version",
+          "items": [
+            "New name and icon: Lumora Film"
+          ]
+        }
+      ]
+    },
+    {
       "version": "v1.2",
       "date": "26 Nov 2026",
       "groups": [
